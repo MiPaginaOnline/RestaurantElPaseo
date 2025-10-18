@@ -136,16 +136,16 @@
         .logo-container {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
 
         .logo-img {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            margin-right: 15px;
-            background-color: #ddd;
             overflow: hidden;
             transition: var(--transition);
+            border: 2px solid var(--secondary-color);
         }
 
         .logo-img:hover {
@@ -158,12 +158,18 @@
             object-fit: cover;
         }
 
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
             color: var(--secondary-color);
             text-decoration: none;
             transition: var(--transition);
+            line-height: 1;
         }
 
         .logo:hover {
@@ -172,6 +178,12 @@
 
         .logo span {
             color: var(--primary-color);
+        }
+
+        .header-hours {
+            font-size: 0.85rem;
+            color: var(--dark-color);
+            margin-top: 2px;
         }
 
         nav {
@@ -787,6 +799,10 @@
             h2 {
                 font-size: 2.2rem;
             }
+            
+            .header-hours {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
@@ -853,9 +869,12 @@
             <div class="logo-container">
                 <div class="logo-img">
                     <!-- Aquí puedes reemplazar con tu imagen -->
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI1IDBDMTEuMTkyOSAwIDAgMTEuMTkyOSAwIDI1QzAgMzguODA3MSAxMS4xOTI5IDUwIDI1IDUwQzM4LjgwNzEgNTAgNTAgMzguODA3MSA1MCAyNUM1MCAxMS4xOTI5IDM4LjgwNzEgMCAyNSAwWk0yNSAxMEMzNC44Mjg0IDEwIDQyLjUgMTcuNjcxNiA0Mi41IDI3LjVDNDIuNSAzNy4zMjg0IDM0LjgyODQgNDUgMjUgNDVDMTUuMTcxNiA0NSA3LjUgMzcuMzI4NCA3LjUgMjcuNUM3LjUgMTcuNjcxNiAxNS4xNzE2IDEwIDI1IDEwWiIgZmlsbD0iIzhCNDUxMyIvPgo8cGF0aCBkPSJNMjUgMTVDMzEuOTAzNiAxNSAzNy41IDIwLjU5NjQgMzcuNSAyNy41QzM3LjUgMzQuNDAzNiAzMS45MDM2IDQwIDI1IDQwQzE4LjA5NjQgNDAgMTIuNSAzNC40MDM2IDEyLjUgMjcuNUMxMi41IDIwLjU5NjQgMTguMDk2NCAxNSAyNSAxNVoiIGZpbGw9IiNENEFGMzciLz4KPC9zdmc+Cg==" alt="Logo El Paseo">
+                    <img src="https://www.google.com/maps/place/RESTAURANT+CAFETERIA+EL+PASEO/@41.1205091,1.2113523,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgICl4MDjjAE!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAC9h4no_JvEensZZzrMl_zBl-gny0K_zhVD7ak2feNZFeK5UI8ED7itWjQeYYArnjoHv9VqLFnUMH6_wY-HPKXiSmd2h7FNNY5uluo_KFKljtqjlPL1_9_xamk6GlOR6WtTKzayULUl2kg%3Dw114-h86-k-no!7i4608!8i3456!4m7!3m6!1s0x12a157fe4d9e3375:0xdcc02e72a86e9bd6!8m2!3d41.1204009!4d1.2112216!10e5!16s%2Fg%2F11cjpx6v70?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" alt="Restaurante El Paseo">
                 </div>
-                <a href="#" class="logo">El <span>Paseo</span></a>
+                <div class="logo-text">
+                    <a href="#" class="logo">El <span>Paseo</span></a>
+                    <div class="header-hours">Abierto todos los días</div>
+                </div>
             </div>
             <div class="menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
@@ -895,11 +914,6 @@
                         <i class="fas fa-utensils"></i>
                         <h3>Cocina Tradicional</h3>
                         <p>Platos mediterráneos preparados con ingredientes locales y de temporada.</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-wine-glass-alt"></i>
-                        <h3>Amplia Carta de Vinos</h3>
-                        <p>Selección de los mejores vinos de la región para acompañar tu comida.</p>
                     </div>
                     <div class="feature">
                         <i class="fas fa-heart"></i>
@@ -942,10 +956,13 @@
                 <div class="hours">
                     <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
                     <ul class="hours-list">
-                        <li><span class="day">Lunes - Jueves</span> <span>13:00 - 16:00 / 20:00 - 23:00</span></li>
-                        <li><span class="day">Viernes - Sábado</span> <span>13:00 - 16:00 / 20:00 - 00:00</span></li>
+                        <li><span class="day">Lunes</span> <span>13:00 - 16:00 / 20:00 - 23:00</span></li>
+                        <li><span class="day">Martes</span> <span>13:00 - 16:00 / 20:00 - 23:00</span></li>
+                        <li><span class="day">Miércoles</span> <span>13:00 - 16:00 / 20:00 - 23:00</span></li>
+                        <li><span class="day">Jueves</span> <span>13:00 - 16:00 / 20:00 - 23:00</span></li>
+                        <li><span class="day">Viernes</span> <span>13:00 - 16:00 / 20:00 - 00:00</span></li>
+                        <li><span class="day">Sábado</span> <span>13:00 - 16:00 / 20:00 - 00:00</span></li>
                         <li><span class="day">Domingo</span> <span>13:00 - 17:00</span></li>
-                        <li><span class="day">Domingo por la noche</span> <span>Cerrado</span></li>
                     </ul>
                 </div>
             </div>
@@ -1015,37 +1032,37 @@
             <p>Descubre el ambiente y los platos que te esperan en El Paseo</p>
             <div class="gallery-container">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Plato del día">
+                    <img src="https://www.google.com/maps/place/RESTAURANT+CAFETERIA+EL+PASEO/@41.1205091,1.2113523,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEKOnisG185WWZA!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAC9h4noF4xrzS5zF0dwo_ht2_VvfKcT6UKeXBcixFK87hGMJjiqpidC1SZVqzmT0VBqfcbid6Sb2ZTBP_xMelrkAWsUVvzQ2qnNSVKs7eKwEXabDjwCAJvANGOFV7hIYVkbTnyUxdS9x%3Dw203-h270-k-no!7i3000!8i4000!4m7!3m6!1s0x12a157fe4d9e3375:0xdcc02e72a86e9bd6!8m2!3d41.1204009!4d1.2112216!10e5!16s%2Fg%2F11cjpx6v70?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" alt="Plato del día">
                     <div class="gallery-overlay">
                         <h3>Plato del día</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Interior del restaurante">
+                    <img src="https://www.google.com/maps/place/RESTAURANT+CAFETERIA+EL+PASEO/@41.1205091,1.2113523,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgICH0vOmrwE!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAC9h4npPqBbDig456S-k3irA_LCQ15UKzmyylb4KaJw4c57d7t7Mh3AzvgKAFL5ek141VCq7ApSASfYjNWHa69WZMCurNbIBeOGPhYX4vxqjHBx6nEnETAv8yFbgElaBrzVf1F9eKCZ4EQ%3Dw203-h152-k-no!7i4032!8i3024!4m7!3m6!1s0x12a157fe4d9e3375:0xdcc02e72a86e9bd6!8m2!3d41.1204009!4d1.2112216!10e5!16s%2Fg%2F11cjpx6v70?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" alt="Interior del restaurante">
                     <div class="gallery-overlay">
                         <h3>Ambiente acogedor</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1980&q=80" alt="Especialidades">
+                    <img src="https://www.google.com/maps/place/RESTAURANT+CAFETERIA+EL+PASEO/@41.1205091,1.2113523,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgICH0vOmbw!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAC9h4nqP49mvJow_XtinDhs-JMb3O1ejouSkfmVWuSfow0xFkuHfTIGBXW_0WDTGgkGaaFfz6o8SIRh0SP0a49TkQPbUGw0qCtQXJ3G01LkGPlBRqH88cUR_tU7Dfk9h9VLSVdw_2Q4%3Dw203-h152-k-no!7i4032!8i3024!4m7!3m6!1s0x12a157fe4d9e3375:0xdcc02e72a86e9bd6!8m2!3d41.1204009!4d1.2112216!10e5!16s%2Fg%2F11cjpx6v70?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" alt="Especialidades">
                     <div class="gallery-overlay">
                         <h3>Nuestras especialidades</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80" alt="Postres caseros">
+                    <img src="https://www.google.com/maps/place/RESTAURANT+CAFETERIA+EL+PASEO/@41.1205091,1.2113523,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgICZsaXcYw!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAC9h4nq860Ke-eG5w2cg5Cs7qSdIYVo_9r5nXNBItzvYM0my0XsCb4FsR8Z_K0E9dnpwAPVYHChjXJsFv1F6R7jc4MjWOq78CHpPdl60Jq-yjYuNwZJ5aSnHaV4jBlGSgdZQzpjKCp8%3Dw203-h152-k-no!7i4000!8i3000!4m7!3m6!1s0x12a157fe4d9e3375:0xdcc02e72a86e9bd6!8m2!3d41.1204009!4d1.2112216!10e5!16s%2Fg%2F11cjpx6v70?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" alt="Postres caseros">
                     <div class="gallery-overlay">
                         <h3>Postres caseros</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Carta de vinos">
+                    <img src="https://www.google.com/maps/place/RESTAURANT+CAFETERIA+EL+PASEO/@41.1205091,1.2113523,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgICl29D7zQE!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAC9h4nrMyjv0rUJTzYWYlWeupyNzzHJcJcLO43jz2ibM1wo-0pVHkum6uNjyCAJ0r3HFAHKWre-688WiUuKeuNtjJs80RGCkG84Dz4gC1fUdWvl7-FnYdW2FbWAcRd4G40PLwgp-p2oAkg%3Dw203-h270-k-no!7i3000!8i4000!4m7!3m6!1s0x12a157fe4d9e3375:0xdcc02e72a86e9bd6!8m2!3d41.1204009!4d1.2112216!10e5!16s%2Fg%2F11cjpx6v70?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" alt="Carta de vinos">
                     <div class="gallery-overlay">
                         <h3>Selección de vinos</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2047&q=80" alt="Terraza exterior">
+                    <img src="https://www.google.com/maps/place/RESTAURANT+CAFETERIA+EL+PASEO/@41.1205091,1.2113523,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgICH0vOmLw!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAC9h4noK4DXi3Cto21STK4l5awZ4A-qyv4JbRELVKUOJ_6iMdwLa1n4ba1xu3PE9cLoxqTJ6qKYEqM-FX-I2tBbd7MrauZc3fMx6M5xaac9C7kUnG-5NTDj53BCgLVSqvtrSpw_f3DA%3Dw203-h152-k-no!7i4032!8i3024!4m7!3m6!1s0x12a157fe4d9e3375:0xdcc02e72a86e9bd6!8m2!3d41.1204009!4d1.2112216!10e5!16s%2Fg%2F11cjpx6v70?authuser=0&entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D" alt="Terraza exterior">
                     <div class="gallery-overlay">
                         <h3>Terraza exterior</h3>
                     </div>
