@@ -246,7 +246,7 @@
         /* Hero Section con Carrusel */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('mesas etc.PNG') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -912,7 +912,6 @@
         <nav>
             <div class="logo-container">
                 <div class="logo-img">
-                    <!-- Aquí puedes reemplazar con tu imagen -->
                     <img src="mesas etc. 2.PNG" alt="Restaurante El Paseo">
                 </div>
                 <div class="logo-text">
@@ -935,74 +934,20 @@
         </nav>
     </header>
 
-<!-- Sección Hero con Carrusel -->
-<section class="hero" id="inicio">
-    <div class="hero-content">
-        <h1>Restaurante El Paseo</h1>
-        <p>Sabores auténticos en el corazón de Tarragona</p>
-        <a href="#nosotros" class="btn">Descubre Más</a>
-    </div>
-    
-    <div class="carousel-controls">
-        <div class="carousel-dot active" data-index="0"></div>
-        <div class="carousel-dot" data-index="1"></div>
-        <div class="carousel-dot" data-index="2"></div>
-    </div>
-</section>
-
-<script>
-    // CARRUSEL AUTOMÁTICO - MODIFICA ESTAS URLS PARA CAMBIAR LAS FOTOS
-    const heroImages = [
-        'mesas etc.PNG', // Imagen 1 - Interior del restaurante
-        'mesas etc. 1.PNG', // Imagen 2 - Comida
-        'mesas etc. 2.PNG'  // Imagen 3 - Plato especial
-    ];
-
-    // NO MODIFICAR ESTE CÓDIGO - Funcionalidad del carrusel
-    const heroSection = document.querySelector('.hero');
-    const carouselDots = document.querySelectorAll('.carousel-dot');
-    let currentImageIndex = 0;
-
-    function changeHeroImage() {
-        // Actualizar índice
-        currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+    <!-- Sección Hero con Carrusel -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Restaurante El Paseo</h1>
+            <p>Sabores auténticos en el corazón de Tarragona</p>
+            <a href="#nosotros" class="btn">Descubre Más</a>
+        </div>
         
-        // Cambiar imagen de fondo
-        heroSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${heroImages[currentImageIndex]}')`;
-        
-        // Actualizar dots
-        carouselDots.forEach((dot, index) => {
-            if (index === currentImageIndex) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
-        });
-    }
-
-    // Cambiar imagen cada 3 segundos
-    setInterval(changeHeroImage, 3000);
-
-    // Control manual con los dots
-    carouselDots.forEach(dot => {
-        dot.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            currentImageIndex = index;
-            
-            // Cambiar imagen de fondo
-            heroSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${heroImages[currentImageIndex]}')`;
-            
-            // Actualizar dots
-            carouselDots.forEach((d, i) => {
-                if (i === currentImageIndex) {
-                    d.classList.add('active');
-                } else {
-                    d.classList.remove('active');
-                }
-            });
-        });
-    });
-</script>
+        <div class="carousel-controls">
+            <div class="carousel-dot active" data-index="0"></div>
+            <div class="carousel-dot" data-index="1"></div>
+            <div class="carousel-dot" data-index="2"></div>
+        </div>
+    </section>
 
     <!-- Sección Sobre Nosotros -->
     <section class="about" id="nosotros">
@@ -1401,11 +1346,11 @@
             reservationForm.reset();
         });
 
-        // Carrusel automático para el hero
+        // CARRUSEL AUTOMÁTICO - SOLO UNA VEZ DECLARADO
         const heroImages = [
-            'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-            'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-            'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
+            'mesas etc.PNG',
+            'mesas etc. 1.PNG',
+            'mesas etc. 2.PNG'
         ];
 
         const heroSection = document.querySelector('.hero');
