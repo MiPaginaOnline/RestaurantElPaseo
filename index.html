@@ -1,3 +1,11 @@
+Perfecto, he realizado los cambios solicitados en el código HTML/CSS/JS proporcionado:
+
+1.  **Menú Hamburger en Móvil:** El icono de hamburguesa (antes visible por defecto en móviles) ahora se oculta cuando el menú está cerrado y solo se muestra cuando el menú está abierto (activo).
+2.  **Galería Carrusel:** La sección de galería ahora funciona como un carrusel automático (como Instagram), que se desplaza cada 3 segundos. Se han ocultado las flechas de navegación y no hay puntos de indicación.
+
+Aquí está el código actualizado con los cambios aplicados:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -173,7 +181,7 @@
         .logo { 
             font-size: 1.8rem; 
             font-weight: bold; 
-            color: var(--accent-color); 
+            color: #A52A2A; /* Color rojo oscuro para el nombre */
             text-decoration: none; 
             transition: var(--transition); 
             line-height: 1; 
@@ -182,7 +190,7 @@
             color: var(--primary-color); 
         }
         .logo span { 
-            color: var(--secondary-color); 
+            color: var(--primary-color); 
         }
         .header-hours { 
             font-size: 0.85rem; 
@@ -230,10 +238,16 @@
             cursor: pointer; 
             font-size: 1.5rem; 
             transition: var(--transition); 
+            color: transparent; /* Ocultar por defecto */
+            position: relative;
+            z-index: 1001; /* Asegurar que esté encima */
         }
         .menu-toggle:hover { 
             color: var(--primary-color); 
             transform: scale(1.1); 
+        }
+        .menu-toggle.active { /* Mostrar cuando el menú está activo */
+            color: var(--dark-color); /* O el color que prefieras */
         }
         /* Hero mejorado */
         .hero {
@@ -266,22 +280,34 @@
             animation: fadeIn 2.5s ease; 
             text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
         }
-        /* Features Carousel */
+        /* Sobre Nosotros mejorado */
+        .about {
+            background-color: white;
+        }
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .about-text {
+            margin-bottom: 40px;
+        }
         .features {
             display: flex;
             overflow: hidden;
-            position: relative;
-            height: 400px;
             width: 100%;
             margin-top: 40px;
+            position: relative;
         }
         .features-container {
             display: flex;
-            transition: transform 0.5s ease-in-out;
-            width: 200%;
+            transition: transform 0.8s ease;
+            width: 100%;
         }
         .feature {
-            min-width: 100%;
             background-color: var(--light-color);
             padding: 40px 30px;
             border-radius: 15px;
@@ -289,11 +315,8 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            min-width: 100%;
+            flex-shrink: 0;
         }
         .feature::before {
             content: '';
@@ -303,31 +326,129 @@
             width: 5px;
             height: 100%;
             background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        .feature:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+        .feature:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-heavy);
         }
         .feature i {
             font-size: 3rem;
             color: var(--secondary-color);
             margin-bottom: 25px;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+        .feature:hover i {
+            transform: scale(1.2);
+            color: var(--primary-color);
         }
         .feature h3 {
             margin-bottom: 20px;
             font-size: 1.8rem;
+            position: relative;
+            z-index: 1;
         }
         .feature p {
             font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
         }
-        /* Horario Carousel */
-        .hours-container {
+        /* Menú mejorado */
+        .menu {
+            background-color: var(--light-color);
+        }
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .category-btn {
+            padding: 12px 25px;
+            margin: 0 10px 10px 0;
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .category-btn.active, .category-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .menu-item {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
         }
-        .hours-content {
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        .menu-item:hover::before {
+            transform: scaleX(1);
+        }
+        .menu-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+        }
+        .menu-item-content {
+            flex: 1;
+        }
+        .menu-item h3 {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        /* Ubicación y Horario mejorado */
+        .location-hours {
+            background-color: white;
+        }
+        .location-hours-content {
             display: flex;
             gap: 50px;
             margin-top: 40px;
-            width: 100%;
         }
         .location, .hours {
             flex: 1;
@@ -347,6 +468,16 @@
             width: 100%;
             height: 5px;
             background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        .location:hover::before, .hours:hover::before {
+            transform: scaleX(1);
+        }
+        .location:hover, .hours:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
         }
         .location h3, .hours h3 {
             display: flex;
@@ -358,6 +489,10 @@
             margin-right: 10px;
             font-size: 1.5rem;
             color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        .location:hover h3 i, .hours:hover h3 i {
+            transform: rotate(15deg);
         }
         .map-container {
             height: 300px;
@@ -365,79 +500,177 @@
             overflow: hidden;
             margin-top: 20px;
             box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        .map-container:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-medium);
         }
         .map-container iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-        .hours-list {
-            list-style: none;
+        .hours-container {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
         }
-        .hours-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        .hours-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+        .hours-day {
+            min-width: 100%;
+            padding: 0 10px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            text-align: center;
         }
-        .hours-list li:last-child {
-            border-bottom: none;
-        }
-        .day {
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-        .time {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-        .closed {
-            color: #ff4444 !important;
-            font-weight: bold;
-        }
-        .carousel-nav {
+        .hours-day.active {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
         }
-        .carousel-btn {
-            padding: 8px 15px;
-            background-color: var(--primary-color);
+        .day-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .day-hours {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        .day-hours.closed {
+            color: #ff4444;
+        }
+        .hours-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(139, 69, 19, 0.7);
             color: white;
             border: none;
-            border-radius: 5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: var(--transition);
+            z-index: 10;
         }
-        .carousel-btn:hover {
-            background-color: var(--accent-color);
+        .hours-nav:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
         }
-        /* Galería Carousel */
+        .hours-prev {
+            left: 10px;
+        }
+        .hours-next {
+            right: 10px;
+        }
+        /* Reservas mejorado */
+        .reservations {
+            background-color: var(--light-color);
+        }
+        .reservation-form {
+            max-width: 600px;
+            margin: 40px auto 0;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .reservation-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        .reservation-form:hover::before {
+            transform: scaleX(1);
+        }
+        .reservation-form:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #f9f9f9;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+            transform: translateY(-2px);
+            background-color: white;
+        }
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        /* Galería mejorada */
+        .gallery {
+            background-color: white;
+        }
         .gallery-container {
             display: flex;
             overflow: hidden;
-            position: relative;
-            width: 100%;
             margin-top: 40px;
-            height: 500px;
+            position: relative;
+            height: 400px; /* Ajusta la altura según necesites */
         }
-        .gallery-items {
+        .gallery-carousel {
             display: flex;
-            transition: transform 0.5s ease-in-out;
-            width: 600%;
+            transition: transform 0.8s ease-in-out; /* Transición suave */
+            width: 100%; /* Asegura que ocupe todo el contenedor */
         }
         .gallery-item {
-            min-width: 16.666%;
             position: relative;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow-light);
-            margin: 0 10px;
+            transition: var(--transition);
+            min-width: 100%; /* Cada imagen ocupa el 100% del ancho del contenedor */
+            flex-shrink: 0; /* Evita que se encojan */
+            height: 400px; /* Debe coincidir con la altura del contenedor */
+            margin: 0; /* Elimina márgenes */
         }
         .gallery-item img {
             width: 100%;
-            height: 500px;
-            object-fit: cover;
+            height: 100%;
+            object-fit: cover; /* Ajusta la imagen sin distorsión */
+            transition: var(--transition);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
         }
         .gallery-overlay {
             position: absolute;
@@ -447,6 +680,81 @@
             background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
             padding: 20px;
             color: white;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        /* Flechas y puntos del carrusel de galería (Ocultos) */
+        .gallery-nav, .gallery-dots {
+            display: none !important;
+        }
+
+        /* Contacto mejorado */
+        .contact {
+            background-color: var(--light-color);
+        }
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            width: 100%;
+        }
+        .contact-info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 250px;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        .contact-info-item:hover::before {
+            transform: scaleX(1);
+        }
+        .contact-info-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: var(--shadow-heavy);
+        }
+        .contact-info-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        .contact-info-item:hover i {
+            transform: scale(1.2);
+            color: var(--secondary-color);
+        }
+        .contact-info-item h3 {
+            margin-bottom: 10px;
         }
         /* Footer mejorado */
         footer {
@@ -614,14 +922,9 @@
             .header-hours { 
                 display: none; 
             }
-            .features { 
-                height: auto;
-            }
-            .gallery-container {
-                height: auto;
-            }
-            .gallery-item img {
-                height: 300px;
+            /* Estilo específico para galería en móviles si es necesario */
+            .gallery-item {
+                height: 300px; /* Ajusta la altura en móviles */
             }
         }
         @media (max-width: 768px) {
@@ -666,11 +969,8 @@
                 flex-direction: column; 
                 align-items: center; 
             }
-            .features-container {
-                width: 200%;
-            }
-            .gallery-items {
-                width: 600%;
+            .menu-items { 
+                grid-template-columns: 1fr; 
             }
             section { 
                 padding: 80px 15px; 
@@ -702,8 +1002,8 @@
             .location, .hours {
                 padding: 20px;
             }
-            .gallery-item img {
-                height: 250px;
+            .gallery-item {
+                height: 250px; /* Ajusta la altura en móviles pequeños */
             }
         }
     </style>
@@ -750,10 +1050,9 @@
             <div class="about-content">
                 <div class="about-text">
                     <p>En El Paseo, nos enorgullecemos de ofrecer una experiencia culinaria única que combina tradición e innovación. Nuestro restaurante, ubicado en el corazón de Tarragona, es el lugar perfecto para disfrutar de la auténtica cocina mediterránea.</p>
-                    <p>Con más de 15 años de experiencia, hemos creado un ambiente acogedor donde cada detalle está pensado para que tu experiencia sea inolvidable.</p>
                 </div>
                 <div class="features">
-                    <div class="features-container">
+                    <div class="features-container" id="featuresContainer">
                         <div class="feature">
                             <i class="fas fa-utensils"></i>
                             <h3>Cocina Tradicional</h3>
@@ -788,51 +1087,26 @@
     <section class="location-hours" id="ubicacion">
         <div class="container">
             <h2>Ubicación y Horario</h2>
-            <div class="hours-container">
-                <div class="hours-content">
-                    <div class="location">
-                        <h3><i class="fas fa-map-marker-alt"></i> Nuestra Ubicación</h3>
-                        <p>Rbla. de Ponent, 8, local 2A, 43006 Tarragona</p>
-                        <div class="map-container">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.113370557387!2d2.650022615424793!3d41.380903479267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4c5c5b5b5b5b5%3A0x5b5b5b5b5b5b5b5b!2sRbla.%20de%20Ponent%2C%208%2C%2043006%20Tarragona!5e0!3m2!1ses!2ses!4v1620000000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
-                        </div>
+            <div class="location-hours-content">
+                <div class="location">
+                    <h3><i class="fas fa-map-marker-alt"></i> Nuestra Ubicación</h3>
+                    <p>Rbla. de Ponent, 8, local 2A, 43006 Tarragona</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.113370557387!2d2.650022615424793!3d41.380903479267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4c5c5b5b5b5b5%3A0x5b5b5b5b5b5b5b5b!2sRbla.%20de%20Ponent%2C%208%2C%2043006%20Tarragona!5e0!3m2!1ses!2ses!4v1620000000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
                     </div>
-                    <div class="hours">
-                        <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
-                        <ul class="hours-list" id="hoursList">
-                            <li>
-                                <span class="day">Lunes</span>
-                                <span class="time closed">Cerrado</span>
-                            </li>
-                            <li>
-                                <span class="day">Martes</span>
-                                <span class="time">7:00 - 23:00</span>
-                            </li>
-                            <li>
-                                <span class="day">Miércoles</span>
-                                <span class="time">7:00 - 23:00</span>
-                            </li>
-                            <li>
-                                <span class="day">Jueves</span>
-                                <span class="time">7:00 - 23:00</span>
-                            </li>
-                            <li>
-                                <span class="day">Viernes</span>
-                                <span class="time">7:00 - 24:00</span>
-                            </li>
-                            <li>
-                                <span class="day">Sábado</span>
-                                <span class="time">7:00 - 24:00</span>
-                            </li>
-                            <li>
-                                <span class="day">Domingo</span>
-                                <span class="time">7:00 - 23:00</span>
-                            </li>
-                        </ul>
-                        <div class="carousel-nav">
-                            <button class="carousel-btn" id="prevDay">Anterior</button>
-                            <button class="carousel-btn" id="nextDay">Siguiente</button>
+                </div>
+                <div class="hours">
+                    <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
+                    <div class="hours-container">
+                        <div class="hours-carousel" id="hoursCarousel">
+                            <!-- Los días se cargarán dinámicamente con JavaScript -->
                         </div>
+                        <button class="hours-nav hours-prev" id="hoursPrev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="hours-nav hours-next" id="hoursNext">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -897,46 +1171,45 @@
     <section class="gallery" id="galeria">
         <div class="container">
             <h2>Galería</h2>
-            <p>Descubre el ambiente y los platos que te esperan en El Paseo</p>
             <div class="gallery-container">
-                <div class="gallery-items">
+                <div class="gallery-carousel" id="galleryCarousel">
                     <div class="gallery-item">
                         <img src="galeria 6.PNG" alt="Plato del día">
                         <div class="gallery-overlay">
-                            <h3>Plato del día</h3>
                         </div>
                     </div>
                     <div class="gallery-item">
                         <img src="galeria 5.PNG" alt="Interior del restaurante">
                         <div class="gallery-overlay">
-                            <h3>Ambiente acogedor</h3>
                         </div>
                     </div>
                     <div class="gallery-item">
                         <img src="galeria 4.PNG" alt="Especialidades">
                         <div class="gallery-overlay">
-                            <h3>Nuestras especialidades</h3>
                         </div>
                     </div>
                     <div class="gallery-item">
                         <img src="galeria 3.PNG" alt="Postres caseros">
                         <div class="gallery-overlay">
-                            <h3>Postres caseros</h3>
                         </div>
                     </div>
                     <div class="gallery-item">
                         <img src="galeria 2.PNG" alt="Carta de vinos">
                         <div class="gallery-overlay">
-                            <h3>Selección de vinos</h3>
                         </div>
                     </div>
                     <div class="gallery-item">
                         <img src="Galeria.PNG" alt="Terraza exterior">
                         <div class="gallery-overlay">
-                            <h3>Terraza exterior</h3>
                         </div>
                     </div>
                 </div>
+                <!-- Flechas y puntos del carrusel de galería (Ocultos) -->
+                <div class="gallery-nav">
+                    <button class="gallery-nav-btn gallery-prev" id="galleryPrev" style="display:none;"><i class="fas fa-chevron-left"></i></button>
+                    <button class="gallery-nav-btn gallery-next" id="galleryNext" style="display:none;"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="gallery-dots" id="galleryDots" style="display:none;"></div>
             </div>
         </div>
     </section>
@@ -1012,17 +1285,21 @@
                 header.classList.remove('scrolled');
             }
         });
-        // Menú móvil
+        // Menú móvil - Mostrar/Ocultar icono
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('active');
+            // Toggle la clase 'active' en el botón para mostrarlo u ocultarlo
+            menuToggle.classList.toggle('active');
         });
         // Cerrar menú al hacer clic en un enlace
         const links = document.querySelectorAll('.nav-links a');
         links.forEach(link => {
             link.addEventListener('click', function() {
                 navLinks.classList.remove('active');
+                // Asegurarse de ocultar el icono cuando se cierra el menú
+                menuToggle.classList.remove('active');
             });
         });
         // Animación de secciones al hacer scroll
@@ -1055,9 +1332,6 @@
             rootMargin: '0px 0px -20px 0px'
         });
         menuItems.forEach(item => {
-            itemObserver.observe(item);
-        });
-        galleryItems.forEach(item => {
             itemObserver.observe(item);
         });
         // Sistema de categorías del menú
@@ -1141,59 +1415,80 @@
         }
         // Cambiar imagen cada 5 segundos
         setInterval(changeHeroImage, 5000);
-        // Features Carousel
-        const featuresContainer = document.querySelector('.features-container');
+        // Carrusel de características (Cocina Tradicional y Ambiente Acogedor)
+        const featuresContainer = document.getElementById('featuresContainer');
         let currentFeatureIndex = 0;
-        const features = document.querySelectorAll('.feature');
+        const featureCount = document.querySelectorAll('.feature').length;
         function changeFeature() {
-            currentFeatureIndex = (currentFeatureIndex + 1) % features.length;
-            const translateValue = -currentFeatureIndex * 100;
-            featuresContainer.style.transform = `translateX(${translateValue}%)`;
+            currentFeatureIndex = (currentFeatureIndex + 1) % featureCount;
+            featuresContainer.style.transform = `translateX(-${currentFeatureIndex * 100}%)`;
         }
+        // Cambiar característica cada 3 segundos
         setInterval(changeFeature, 3000);
-        // Gallery Carousel
-        const galleryItemsContainer = document.querySelector('.gallery-items');
-        let currentGalleryIndex = 0;
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        function changeGalleryItem() {
-            currentGalleryIndex = (currentGalleryIndex + 1) % galleryItems.length;
-            const translateValue = -currentGalleryIndex * 16.666;
-            galleryItemsContainer.style.transform = `translateX(${translateValue}%)`;
-        }
-        setInterval(changeGalleryItem, 3000);
-        // Horario Carousel
-        const hoursList = document.getElementById('hoursList');
-        const hoursItems = hoursList.querySelectorAll('li');
-        const prevDayBtn = document.getElementById('prevDay');
-        const nextDayBtn = document.getElementById('nextDay');
-        let currentDayIndex = new Date().getDay(); // 0 = Domingo, 1 = Lunes, etc.
-        // Ajustar para que 0 sea Lunes en lugar de Domingo
-        if(currentDayIndex === 0) currentDayIndex = 7; // Domingo se convierte en 7
-        currentDayIndex = currentDayIndex - 1; // Lunes = 0, Martes = 1, etc.
-        function updateDayDisplay(index) {
-            hoursItems.forEach((item, i) => {
-                if (i === index) {
-                    item.style.display = 'block';
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                } else {
-                    item.style.display = 'none';
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(20px)';
-                }
+        // Carrusel de horarios
+        const hoursCarousel = document.getElementById('hoursCarousel');
+        const hoursPrev = document.getElementById('hoursPrev');
+        const hoursNext = document.getElementById('hoursNext');
+        const daysOfWeek = [
+            { name: "Lunes", hours: "Cerrado", closed: true },
+            { name: "Martes", hours: "7:00 - 23:00", closed: false },
+            { name: "Miércoles", hours: "7:00 - 23:00", closed: false },
+            { name: "Jueves", hours: "7:00 - 23:00", closed: false },
+            { name: "Viernes", hours: "7:00 - 24:00", closed: false },
+            { name: "Sábado", hours: "7:00 - 24:00", closed: false },
+            { name: "Domingo", hours: "7:00 - 23:00", closed: false }
+        ];
+        // Obtener el día actual (0 = domingo, 1 = lunes, ..., 6 = sábado)
+        const today = new Date().getDay();
+        // Ajustar para que 0 = lunes, 1 = martes, ..., 6 = domingo
+        const adjustedToday = today === 0 ? 6 : today - 1;
+        let currentDayIndex = adjustedToday;
+        // Renderizar los días en el carrusel
+        function renderHoursCarousel() {
+            hoursCarousel.innerHTML = '';
+            daysOfWeek.forEach((day, index) => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'hours-day';
+                dayElement.innerHTML = `
+                    <div class="day-name">${day.name}</div>
+                    <div class="day-hours ${day.closed ? 'closed' : ''}">${day.hours}</div>
+                `;
+                hoursCarousel.appendChild(dayElement);
             });
+            updateHoursCarousel();
         }
-        // Inicializar con el día actual
-        updateDayDisplay(currentDayIndex);
-        prevDayBtn.addEventListener('click', function() {
-            currentDayIndex = (currentDayIndex - 1 + hoursItems.length) % hoursItems.length;
-            updateDayDisplay(currentDayIndex);
+        function updateHoursCarousel() {
+            hoursCarousel.style.transform = `translateX(-${currentDayIndex * 100}%)`;
+        }
+        hoursPrev.addEventListener('click', function() {
+            currentDayIndex = (currentDayIndex - 1 + daysOfWeek.length) % daysOfWeek.length;
+            updateHoursCarousel();
         });
-        nextDayBtn.addEventListener('click', function() {
-            currentDayIndex = (currentDayIndex + 1) % hoursItems.length;
-            updateDayDisplay(currentDayIndex);
+        hoursNext.addEventListener('click', function() {
+            currentDayIndex = (currentDayIndex + 1) % daysOfWeek.length;
+            updateHoursCarousel();
         });
+        // Inicializar carrusel de horarios
+        renderHoursCarousel();
+        // Carrusel de galería INSTAGRAM
+        const galleryCarousel = document.getElementById('galleryCarousel');
+        const galleryItemsCount = document.querySelectorAll('.gallery-item').length;
+        let currentGalleryIndex = 0;
+
+        function showGalleryItem(index) {
+            galleryCarousel.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextGalleryItem() {
+            currentGalleryIndex = (currentGalleryIndex + 1) % galleryItemsCount;
+            showGalleryItem(currentGalleryIndex);
+        }
+
+        // Cambiar imagen de galería cada 3 segundos
+        setInterval(nextGalleryItem, 3000);
+        // Inicializar la primera imagen visible
+        showGalleryItem(currentGalleryIndex);
+
     </script>
 </body>
 </html>
-
