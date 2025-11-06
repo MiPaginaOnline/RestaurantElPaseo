@@ -6,193 +6,306 @@
     <title>Restaurante El Paseo | Tarragona</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-/* Variables CSS */
-:root {
-    --primary-color: #8B4513;
-    --secondary-color: #D4AF37;
-    --accent-color: #A52A2A;
-    --light-color: #F5F5DC;
-    --dark-color: #333;
-    --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Reset y estilos globales */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 100%; /* Evita desbordamiento horizontal */
-}
-
-html, body {
-    scroll-behavior: smooth;
-    overflow-x: hidden; /* Evita scroll horizontal */
-    width: 100%;
-    background-color: var(--light-color);
-    color: var(--dark-color);
-}
-
-/* Secciones */
-section {
-    padding: 100px 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s ease, transform 1s ease;
-    width: 100%;
-}
-
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Contenedor principal */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-    width: 100%;
-}
-
-/* Tipografía */
-h1, h2, h3 {
-    margin-bottom: 20px;
-    color: var(--primary-color);
-}
-
-h1 { font-size: 3.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);}
-h2 { font-size: 2.5rem; text-align: center; position: relative; padding-bottom: 15px; margin-bottom: 50px; }
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background-color: var(--secondary-color);
-}
-p { line-height: 1.6; margin-bottom: 15px; }
-
-/* Botones */
-.btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: var(--transition);
-    border: none;
-    cursor: pointer;
-}
-.btn:hover {
-    background-color: var(--accent-color);
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-/* Header */
-header {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 1200px;
-    z-index: 1000;
-    transition: var(--transition);
-    padding: 15px 30px;
-    background-color: rgba(255,255,255,0.92);
-    border-radius: 50px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-    backdrop-filter: blur(5px);
-}
-header.scrolled { top: 10px; padding: 12px 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
-
-.logo-container { display: flex; align-items: center; gap: 15px; }
-.logo-img { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; transition: var(--transition); border: 2px solid var(--secondary-color); }
-.logo-img:hover { transform: rotate(10deg) scale(1.1); }
-.logo-img img { width: 100%; height: 100%; object-fit: cover; }
-.logo-text { display: flex; flex-direction: column; }
-.logo { font-size: 1.8rem; font-weight: bold; color: var(--secondary-color); text-decoration: none; transition: var(--transition); line-height: 1; }
-.logo:hover { color: var(--primary-color); }
-.logo span { color: var(--primary-color); }
-.header-hours { font-size: 0.85rem; color: var(--dark-color); margin-top: 2px; }
-
-nav { display: flex; justify-content: space-between; align-items: center; }
-.nav-links { display: flex; list-style: none; }
-.nav-links li { margin-left: 30px; }
-.nav-links a {
-    color: var(--dark-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
-    position: relative;
-}
-.nav-links a:hover { color: var(--primary-color); }
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: var(--transition);
-}
-.nav-links a:hover::after { width: 100%; }
-
-.menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; transition: var(--transition); }
-.menu-toggle:hover { color: var(--primary-color); transform: scale(1.1); }
-
-/* Hero */
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mesas etc.PNG') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    position: relative;
-    transition: background-image 1.5s ease-in-out;
-}
-.hero-content { max-width: 800px; padding: 0 20px; z-index: 1; animation: fadeInUp 1.5s ease; }
-.hero h1 { color: white; margin-bottom: 20px; font-size: 4rem; animation: fadeIn 2s ease; }
-.hero p { font-size: 1.2rem; margin-bottom: 30px; animation: fadeIn 2.5s ease; }
-
-/* Carousel */
-.carousel-controls {
-    position: absolute;
-    bottom: 30px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    z-index: 2;
-}
-.carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.5);
-    cursor: pointer;
-    transition: var(--transition);
-}
-.carousel-dot.active { background-color: var(--secondary-color); transform: scale(1.2); }
-.carousel-dot:hover { background-color: white; }
-            }
+        /* Variables CSS mejoradas */
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D4AF37;
+            --accent-color: #A52A2A;
+            --light-color: #F5F5DC;
+            --dark-color: #333;
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-light: 0 5px 15px rgba(0,0,0,0.1);
+            --shadow-medium: 0 10px 25px rgba(0,0,0,0.15);
+            --shadow-heavy: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        /* Sobre Nosotros */
+        /* Reset y estilos globales mejorados */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 100%;
+        }
+
+        html, body {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* Secciones mejoradas */
+        section {
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+            width: 100%;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Contenedor principal mejorado */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        /* Tipografía mejorada */
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        h1 { 
+            font-size: 3.5rem; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+        
+        h2 { 
+            font-size: 2.5rem; 
+            text-align: center; 
+            position: relative; 
+            padding-bottom: 15px; 
+            margin-bottom: 50px; 
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        p { 
+            line-height: 1.7; 
+            margin-bottom: 15px; 
+            font-size: 1.1rem;
+        }
+
+        /* Botones mejorados */
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        /* Header mejorado */
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 15px 30px;
+            background-color: rgba(255,255,255,0.95);
+            border-radius: 50px;
+            box-shadow: var(--shadow-medium);
+            backdrop-filter: blur(10px);
+        }
+        
+        header.scrolled { 
+            top: 10px; 
+            padding: 12px 25px; 
+            box-shadow: var(--shadow-heavy); 
+        }
+
+        .logo-container { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+        
+        .logo-img { 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            transition: var(--transition); 
+            border: 2px solid var(--secondary-color); 
+        }
+        
+        .logo-img:hover { 
+            transform: rotate(10deg) scale(1.1); 
+        }
+        
+        .logo-img img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+        
+        .logo-text { 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        .logo { 
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            color: #A52A2A; /* Color rojo oscuro para el nombre */
+            text-decoration: none; 
+            transition: var(--transition); 
+            line-height: 1; 
+        }
+        
+        .logo:hover { 
+            color: var(--primary-color); 
+        }
+        
+        .logo span { 
+            color: var(--primary-color); 
+        }
+        
+        .header-hours { 
+            font-size: 0.85rem; 
+            color: var(--dark-color); 
+            margin-top: 2px; 
+        }
+
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+        }
+        
+        .nav-links li { 
+            margin-left: 30px; 
+        }
+        
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover { 
+            color: var(--primary-color); 
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after { 
+            width: 100%; 
+        }
+
+        .menu-toggle { 
+            display: none; 
+            cursor: pointer; 
+            font-size: 1.5rem; 
+            transition: var(--transition); 
+        }
+        
+        .menu-toggle:hover { 
+            color: var(--primary-color); 
+            transform: scale(1.1); 
+        }
+
+        /* Hero mejorado */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mesas etc.PNG') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            transition: background-image 1.5s ease-in-out;
+        }
+        
+        .hero-content { 
+            max-width: 800px; 
+            padding: 0 20px; 
+            z-index: 1; 
+            animation: fadeInUp 1.5s ease; 
+        }
+        
+        .hero h1 { 
+            color: white; 
+            margin-bottom: 20px; 
+            font-size: 4rem; 
+            animation: fadeIn 2s ease; 
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+        
+        .hero p { 
+            font-size: 1.3rem; 
+            margin-bottom: 30px; 
+            animation: fadeIn 2.5s ease; 
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Sobre Nosotros mejorado */
         .about {
             background-color: white;
         }
@@ -211,24 +324,50 @@ nav { display: flex; justify-content: space-between; align-items: center; }
         }
 
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            display: flex;
+            overflow: hidden;
             width: 100%;
             margin-top: 40px;
+            position: relative;
+        }
+
+        .features-container {
+            display: flex;
+            transition: transform 0.8s ease;
+            width: 100%;
         }
 
         .feature {
             background-color: var(--light-color);
             padding: 40px 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .feature:hover::before {
+            width: 100%;
+            opacity: 0.1;
         }
 
         .feature:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-heavy);
         }
 
         .feature i {
@@ -236,6 +375,8 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             color: var(--secondary-color);
             margin-bottom: 25px;
             transition: var(--transition);
+            position: relative;
+            z-index: 1;
         }
 
         .feature:hover i {
@@ -246,13 +387,17 @@ nav { display: flex; justify-content: space-between; align-items: center; }
         .feature h3 {
             margin-bottom: 20px;
             font-size: 1.8rem;
+            position: relative;
+            z-index: 1;
         }
 
         .feature p {
             font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Menú */
+        /* Menú mejorado */
         .menu {
             background-color: var(--light-color);
         }
@@ -265,7 +410,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
         }
 
         .category-btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
             margin: 0 10px 10px 0;
             background-color: white;
             border: 2px solid var(--primary-color);
@@ -273,12 +418,14 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             cursor: pointer;
             transition: var(--transition);
             font-weight: 500;
+            font-size: 1rem;
         }
 
         .category-btn.active, .category-btn:hover {
             background-color: var(--primary-color);
             color: white;
             transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
         }
 
         .menu-items {
@@ -289,15 +436,34 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 
         .menu-item {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-light);
             transition: var(--transition);
             opacity: 0;
             transform: translateY(20px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleX(1);
         }
 
         .menu-item.visible {
@@ -307,7 +473,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 
         .menu-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-heavy);
         }
 
         .menu-item-content {
@@ -326,7 +492,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             font-size: 1.2rem;
         }
 
-        /* Ubicación y Horario */
+        /* Ubicación y Horario mejorado */
         .location-hours {
             background-color: white;
         }
@@ -341,14 +507,33 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             flex: 1;
             background-color: var(--light-color);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location::before, .hours::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .location:hover::before, .hours:hover::before {
+            transform: scaleX(1);
         }
 
         .location:hover, .hours:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-heavy);
         }
 
         .location h3, .hours h3 {
@@ -374,12 +559,13 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             border-radius: 10px;
             overflow: hidden;
             margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-light);
             transition: var(--transition);
         }
 
         .map-container:hover {
             transform: scale(1.02);
+            box-shadow: var(--shadow-medium);
         }
 
         .map-container iframe {
@@ -388,43 +574,80 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             border: none;
         }
 
-        .hours-list {
-            list-style: none;
+        .hours-container {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
         }
 
-        .hours-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        .hours-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .hours-day {
+            min-width: 100%;
+            padding: 0 10px;
             display: flex;
             flex-direction: column;
-            transition: var(--transition);
+            justify-content: center;
+            text-align: center;
         }
 
-        .hours-list li:hover {
-            background-color: rgba(255, 255, 255, 0.5);
-            padding-left: 10px;
+        .hours-day.active {
+            display: flex;
         }
 
-        .hours-list li:last-child {
-            border-bottom: none;
+        .day-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-color);
         }
 
-        .day {
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        .time {
+        .day-hours {
+            font-size: 1.3rem;
+            font-weight: bold;
             color: var(--accent-color);
-            font-weight: bold;
         }
 
-        .closed {
-            color: #ff4444 !important;
-            font-weight: bold;
+        .day-hours.closed {
+            color: #ff4444;
         }
 
-        /* Reservas */
+        .hours-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(139, 69, 19, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .hours-nav:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .hours-prev {
+            left: 10px;
+        }
+
+        .hours-next {
+            right: 10px;
+        }
+
+        /* Reservas mejorado */
         .reservations {
             background-color: var(--light-color);
         }
@@ -433,40 +656,63 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             max-width: 600px;
             margin: 40px auto 0;
             background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reservation-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .reservation-form:hover::before {
+            transform: scaleX(1);
         }
 
         .reservation-form:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-heavy);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: var(--dark-color);
         }
 
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
             transition: var(--transition);
+            background-color: #f9f9f9;
         }
 
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.2);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
             transform: translateY(-2px);
+            background-color: white;
         }
 
         .form-group textarea {
@@ -474,26 +720,37 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             resize: vertical;
         }
 
-        /* Galería */
+        /* Galería mejorada */
         .gallery {
             background-color: white;
         }
 
         .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            display: flex;
+            overflow: hidden;
             margin-top: 40px;
+            position: relative;
+            height: 400px;
+        }
+
+        .gallery-carousel {
+            display: flex;
+            transition: transform 0.8s ease;
+            width: 100%;
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-light);
             transition: var(--transition);
             opacity: 0;
             transform: translateY(20px);
+            min-width: 33.333%;
+            flex-shrink: 0;
+            height: 400px;
+            margin: 0 10px;
         }
 
         .gallery-item.visible {
@@ -503,12 +760,12 @@ nav { display: flex; justify-content: space-between; align-items: center; }
 
         .gallery-item:hover {
             transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-heavy);
         }
 
         .gallery-item img {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: cover;
             transition: var(--transition);
         }
@@ -533,7 +790,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             transform: translateY(0);
         }
 
-        /* Contacto */
+        /* Contacto mejorado */
         .contact {
             background-color: var(--light-color);
         }
@@ -561,20 +818,39 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             flex-direction: column;
             align-items: center;
             max-width: 250px;
-            padding: 20px;
+            padding: 30px 20px;
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .contact-info-item:hover::before {
+            transform: scaleX(1);
         }
 
         .contact-info-item:hover {
             transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-heavy);
         }
 
         .contact-info-item i {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 15px;
             transition: var(--transition);
@@ -589,7 +865,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             margin-bottom: 10px;
         }
 
-        /* Footer */
+        /* Footer mejorado */
         footer {
             background-color: var(--dark-color);
             color: white;
@@ -614,6 +890,18 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             color: var(--secondary-color);
             margin-bottom: 20px;
             font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
         }
 
         .footer-column ul {
@@ -670,84 +958,208 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             color: #aaa;
         }
 
-        /* Botón de Llamada */
+        /* Botón de Llamada mejorado */
         .call-float {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background-color: #25D366;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 2rem;
+            box-shadow: var(--shadow-heavy);
             z-index: 1000;
             transition: var(--transition);
             text-decoration: none;
-            background-color: #34b7f1;
+            animation: pulse 2s infinite;
         }
 
         .call-float:hover {
             transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             background-color: #128C7E;
+            animation: none;
         }
 
-/* Responsive */
-@media (max-width: 992px) {
-    .location-hours-content { flex-direction: column; }
-    .hours { margin-top: 30px; }
-    h1 { font-size: 3rem; }
-    h2 { font-size: 2.2rem; }
-    .header-hours { display: none; }
-    .features { grid-template-columns: 1fr; }
-}
+        /* Animaciones mejoradas */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-@media (max-width: 768px) {
-    .menu-toggle { display: block; }
-    .nav-links {
-        position: fixed;
-        top: 90px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 90px);
-        background-color: white;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding-top: 50px;
-        transition: var(--transition);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    .nav-links.active { left: 0; }
-    .nav-links li { margin: 15px 0; }
-    .hero h1 { font-size: 2.5rem; }
-    .hero p { font-size: 1rem; }
-    .footer-content { flex-direction: column; }
-    header { width: 95%; padding: 12px 20px; }
-    .contact-info { flex-direction: column; align-items: center; }
-    .gallery-container { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-    .menu-items { grid-template-columns: 1fr; }
-    section { padding: 80px 15px; }
-    .container { padding: 0 10px; }
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Responsive mejorado */
+        @media (max-width: 992px) {
+            .location-hours-content { 
+                flex-direction: column; 
+            }
             
-            /* Eliminar línea blanca en móviles */
-            body, html {
-                overflow-x: hidden;
+            .hours { 
+                margin-top: 30px; 
+            }
+            
+            h1 { 
+                font-size: 3rem; 
+            }
+            
+            h2 { 
+                font-size: 2.2rem; 
+            }
+            
+            .header-hours { 
+                display: none; 
+            }
+            
+            .gallery-item {
+                min-width: 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { 
+                display: block; 
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 90px;
+                left: -100%;
                 width: 100%;
+                height: calc(100vh - 90px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: var(--transition);
+                box-shadow: var(--shadow-heavy);
+                z-index: 999;
             }
             
-            section {
-                padding: 80px 15px;
+            .nav-links.active { 
+                left: 0; 
             }
             
-            .container {
-                padding: 0 10px;
+            .nav-links li { 
+                margin: 15px 0; 
+            }
+            
+            .hero h1 { 
+                font-size: 2.5rem; 
+            }
+            
+            .hero p { 
+                font-size: 1.1rem; 
+            }
+            
+            .footer-content { 
+                flex-direction: column; 
+            }
+            
+            header { 
+                width: 95%; 
+                padding: 12px 20px; 
+            }
+            
+            .contact-info { 
+                flex-direction: column; 
+                align-items: center; 
+            }
+            
+            .gallery-item {
+                min-width: 100%;
+            }
+            
+            .menu-items { 
+                grid-template-columns: 1fr; 
+            }
+            
+            section { 
+                padding: 80px 15px; 
+            }
+            
+            .container { 
+                padding: 0 10px; 
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .feature {
+                padding: 30px 20px;
+            }
+            
+            .menu-item {
+                padding: 20px;
+            }
+            
+            .reservation-form {
+                padding: 25px;
+            }
+            
+            .location, .hours {
+                padding: 20px;
             }
         }
     </style>
@@ -785,13 +1197,7 @@ nav { display: flex; justify-content: space-between; align-items: center; }
         <div class="hero-content">
             <h1>Restaurante El Paseo</h1>
             <p>Sabores auténticos en el corazón de Tarragona</p>
-            <a href="#nosotros" class="btn">Descubre Más</a>
-        </div>
-        
-        <div class="carousel-controls">
-            <div class="carousel-dot active" data-index="0"></div>
-            <div class="carousel-dot" data-index="1"></div>
-            <div class="carousel-dot" data-index="2"></div>
+            <a href="#reservas" class="btn">Reserva Ahora</a>
         </div>
     </section>
 
@@ -802,18 +1208,19 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             <div class="about-content">
                 <div class="about-text">
                     <p>En El Paseo, nos enorgullecemos de ofrecer una experiencia culinaria única que combina tradición e innovación. Nuestro restaurante, ubicado en el corazón de Tarragona, es el lugar perfecto para disfrutar de la auténtica cocina mediterránea.</p>
-                    <p>Con más de 15 años de experiencia, hemos creado un ambiente acogedor donde cada detalle está pensado para que tu experiencia sea inolvidable.</p>
                 </div>
                 <div class="features">
-                    <div class="feature">
-                        <i class="fas fa-utensils"></i>
-                        <h3>Cocina Tradicional</h3>
-                        <p>Platos mediterráneos preparados con ingredientes locales y de temporada. Nuestros chefs utilizan recetas transmitidas de generación en generación, combinando los sabores de siempre con un toque de creatividad moderna.</p>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-heart"></i>
-                        <h3>Ambiente Acogedor</h3>
-                        <p>Un espacio diseñado para que te sientas como en casa en cada visita. Desde la decoración rústica hasta la atención personalizada, cada detalle está pensado para crear momentos especiales alrededor de una buena mesa.</p>
+                    <div class="features-container" id="featuresContainer">
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <h3>Cocina Tradicional</h3>
+                            <p>Platos mediterráneos preparados con ingredientes locales y de temporada. Nuestros chefs utilizan recetas transmitidas de generación en generación, combinando los sabores de siempre con un toque de creatividad moderna.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-heart"></i>
+                            <h3>Ambiente Acogedor</h3>
+                            <p>Un espacio diseñado para que te sientas como en casa en cada visita. Desde la decoración rústica hasta la atención personalizada, cada detalle está pensado para crear momentos especiales alrededor de una buena mesa.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -850,36 +1257,17 @@ nav { display: flex; justify-content: space-between; align-items: center; }
                 </div>
                 <div class="hours">
                     <h3><i class="fas fa-clock"></i> Horario de Atención</h3>
-                    <ul class="hours-list">
-                        <li>
-                            <span class="day">Lunes</span>
-                            <span class="time closed">Cerrado</span>
-                        </li>
-                        <li>
-                            <span class="day">Martes</span>
-                            <span class="time">7:00 - 23:00</span>
-                        </li>
-                        <li>
-                            <span class="day">Miércoles</span>
-                            <span class="time">7:00 - 23:00</span>
-                        </li>
-                        <li>
-                            <span class="day">Jueves</span>
-                            <span class="time">7:00 - 23:00</span>
-                        </li>
-                        <li>
-                            <span class="day">Viernes</span>
-                            <span class="time">7:00 - 24:00</span>
-                        </li>
-                        <li>
-                            <span class="day">Sábado</span>
-                            <span class="time">7:00 - 24:00</span>
-                        </li>
-                        <li>
-                            <span class="day">Domingo</span>
-                            <span class="time">7:00 - 23:00</span>
-                        </li>
-                    </ul>
+                    <div class="hours-container">
+                        <div class="hours-carousel" id="hoursCarousel">
+                            <!-- Los días se cargarán dinámicamente con JavaScript -->
+                        </div>
+                        <button class="hours-nav hours-prev" id="hoursPrev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="hours-nav hours-next" id="hoursNext">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -947,40 +1335,42 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             <h2>Galería</h2>
             <p>Descubre el ambiente y los platos que te esperan en El Paseo</p>
             <div class="gallery-container">
-                <div class="gallery-item">
-                    <img src="galeria 6.PNG" alt="Plato del día">
-                    <div class="gallery-overlay">
-                        <h3>Plato del día</h3>
+                <div class="gallery-carousel" id="galleryCarousel">
+                    <div class="gallery-item">
+                        <img src="galeria 6.PNG" alt="Plato del día">
+                        <div class="gallery-overlay">
+                            <h3>Plato del día</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="galeria 5.PNG" alt="Interior del restaurante">
-                    <div class="gallery-overlay">
-                        <h3>Ambiente acogedor</h3>
+                    <div class="gallery-item">
+                        <img src="galeria 5.PNG" alt="Interior del restaurante">
+                        <div class="gallery-overlay">
+                            <h3>Ambiente acogedor</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="galeria 4.PNG" alt="Especialidades">
-                    <div class="gallery-overlay">
-                        <h3>Nuestras especialidades</h3>
+                    <div class="gallery-item">
+                        <img src="galeria 4.PNG" alt="Especialidades">
+                        <div class="gallery-overlay">
+                            <h3>Nuestras especialidades</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="galeria 3.PNG" alt="Postres caseros">
-                    <div class="gallery-overlay">
-                        <h3>Postres caseros</h3>
+                    <div class="gallery-item">
+                        <img src="galeria 3.PNG" alt="Postres caseros">
+                        <div class="gallery-overlay">
+                            <h3>Postres caseros</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="galeria 2.PNG" alt="Carta de vinos">
-                    <div class="gallery-overlay">
-                        <h3>Selección de vinos</h3>
+                    <div class="gallery-item">
+                        <img src="galeria 2.PNG" alt="Carta de vinos">
+                        <div class="gallery-overlay">
+                            <h3>Selección de vinos</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="Galeria.PNG" alt="Terraza exterior">
-                    <div class="gallery-overlay">
-                        <h3>Terraza exterior</h3>
+                    <div class="gallery-item">
+                        <img src="Galeria.PNG" alt="Terraza exterior">
+                        <div class="gallery-overlay">
+                            <h3>Terraza exterior</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1200,7 +1590,6 @@ nav { display: flex; justify-content: space-between; align-items: center; }
         ];
 
         const heroSection = document.querySelector('.hero');
-        const carouselDots = document.querySelectorAll('.carousel-dot');
         let currentImageIndex = 0;
 
         function changeHeroImage() {
@@ -1209,39 +1598,89 @@ nav { display: flex; justify-content: space-between; align-items: center; }
             
             // Cambiar imagen de fondo
             heroSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${heroImages[currentImageIndex]}')`;
-            
-            // Actualizar dots
-            carouselDots.forEach((dot, index) => {
-                if (index === currentImageIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
         }
 
         // Cambiar imagen cada 5 segundos
         setInterval(changeHeroImage, 5000);
 
-        // Control manual con los dots
-        carouselDots.forEach(dot => {
-            dot.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                currentImageIndex = index;
-                
-                // Cambiar imagen de fondo
-                heroSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${heroImages[currentImageIndex]}')`;
-                
-                // Actualizar dots
-                carouselDots.forEach((d, i) => {
-                    if (i === currentImageIndex) {
-                        d.classList.add('active');
-                    } else {
-                        d.classList.remove('active');
-                    }
-                });
+        // Carrusel de características (Cocina Tradicional y Ambiente Acogedor)
+        const featuresContainer = document.getElementById('featuresContainer');
+        let currentFeatureIndex = 0;
+        const featureCount = document.querySelectorAll('.feature').length;
+
+        function changeFeature() {
+            currentFeatureIndex = (currentFeatureIndex + 1) % featureCount;
+            featuresContainer.style.transform = `translateX(-${currentFeatureIndex * 100}%)`;
+        }
+
+        // Cambiar característica cada 3 segundos
+        setInterval(changeFeature, 3000);
+
+        // Carrusel de horarios
+        const hoursCarousel = document.getElementById('hoursCarousel');
+        const hoursPrev = document.getElementById('hoursPrev');
+        const hoursNext = document.getElementById('hoursNext');
+        
+        const daysOfWeek = [
+            { name: "Lunes", hours: "Cerrado", closed: true },
+            { name: "Martes", hours: "7:00 - 23:00", closed: false },
+            { name: "Miércoles", hours: "7:00 - 23:00", closed: false },
+            { name: "Jueves", hours: "7:00 - 23:00", closed: false },
+            { name: "Viernes", hours: "7:00 - 24:00", closed: false },
+            { name: "Sábado", hours: "7:00 - 24:00", closed: false },
+            { name: "Domingo", hours: "7:00 - 23:00", closed: false }
+        ];
+
+        // Obtener el día actual (0 = domingo, 1 = lunes, ..., 6 = sábado)
+        const today = new Date().getDay();
+        // Ajustar para que 0 = lunes, 1 = martes, ..., 6 = domingo
+        const adjustedToday = today === 0 ? 6 : today - 1;
+        let currentDayIndex = adjustedToday;
+
+        // Renderizar los días en el carrusel
+        function renderHoursCarousel() {
+            hoursCarousel.innerHTML = '';
+            daysOfWeek.forEach((day, index) => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'hours-day';
+                dayElement.innerHTML = `
+                    <div class="day-name">${day.name}</div>
+                    <div class="day-hours ${day.closed ? 'closed' : ''}">${day.hours}</div>
+                `;
+                hoursCarousel.appendChild(dayElement);
             });
+            updateHoursCarousel();
+        }
+
+        function updateHoursCarousel() {
+            hoursCarousel.style.transform = `translateX(-${currentDayIndex * 100}%)`;
+        }
+
+        hoursPrev.addEventListener('click', function() {
+            currentDayIndex = (currentDayIndex - 1 + daysOfWeek.length) % daysOfWeek.length;
+            updateHoursCarousel();
         });
+
+        hoursNext.addEventListener('click', function() {
+            currentDayIndex = (currentDayIndex + 1) % daysOfWeek.length;
+            updateHoursCarousel();
+        });
+
+        // Inicializar carrusel de horarios
+        renderHoursCarousel();
+
+        // Carrusel de galería
+        const galleryCarousel = document.getElementById('galleryCarousel');
+        const galleryItemsCount = document.querySelectorAll('.gallery-item').length;
+        let currentGalleryIndex = 0;
+
+        function changeGalleryImage() {
+            currentGalleryIndex = (currentGalleryIndex + 1) % galleryItemsCount;
+            galleryCarousel.style.transform = `translateX(-${currentGalleryIndex * (100 / galleryItemsCount)}%)`;
+        }
+
+        // Cambiar imagen de galería cada 3 segundos
+        setInterval(changeGalleryImage, 3000);
     </script>
 </body>
 </html>
